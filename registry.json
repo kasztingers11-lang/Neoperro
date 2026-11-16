@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": 1,
+  "revision": 2,
   "games": {
     "da-strike": {
       "transport": {
@@ -253,7 +253,9 @@
           "Modules",
           "GunHandler"
         ],
-        "method": "getAim"
+        "method": "getAim",
+        "shotMethod": "shoot",
+        "readyMethod": "getCanShoot"
       },
       "weapons": {
         "ammoNames": [
@@ -289,7 +291,13 @@
           "rifle": "Rifle",
           "drumshotgun": "Drum-Shotgun",
           "silencerar": "SilencerAR",
-          "p90": "P90"
+          "p90": "P90",
+          "glock": "Glock",
+          "deagle": "Deagle",
+          "drumgun": "DrumGun",
+          "flamethrower": "Flamethrower",
+          "rpg": "RPG",
+          "grenadelauncher": "GrenadeLauncher"
         }
       },
       "environment": {
@@ -310,13 +318,26 @@
           "Crew"
         ],
         "animationPath": [
-          "Animations"
+          "ClientAnimations"
+        ],
+        "forceFieldNames": [
+          "FORCEFIELD"
+        ],
+        "blockNames": [
+          "Block"
         ]
       },
       "name": "Da Hood",
       "placeIds": [
         "2788229376"
-      ]
+      ],
+      "capabilities": {
+        "macroAbuse": false
+      },
+      "moderation": {
+        "attribute": "AdminPanelAllowed",
+        "label": "Admin panel access"
+      }
     }
   }
 }
