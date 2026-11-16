@@ -1,0 +1,90 @@
+local environment = getgenv()
+local token = environment.__neoperroPanelToken
+environment.__neoperroPanelToken = nil
+assert(type(token) == 'string' and #token > 80 and #token < 400 and token:match('^[%w_%.%-]+$'),
+    '[neoperro] Run your linked key and website loader to connect.')
+local requestFunction
+for _, candidate in pairs({request, http_request, type(http) == 'table' and http.request,
+    type(syn) == 'table' and syn.request, type(fluxus) == 'table' and fluxus.request}) do
+    if type(candidate) == 'function' then requestFunction = candidate; break end
+end
+assert(type(requestFunction) == 'function', '[neoperro] This connection requires HTTP request support.')
+local runtime = environment.__neoperroRuntimeV1
+assert(type(runtime) == 'table' and runtime.Alive and type(runtime.ApplyConfig) == 'function', '[neoperro] Load your existing key, table and loader first.')
+local settings = environment.neoperro
+assert(runtime.PanelAlwaysConnect or type(settings) == 'table' and settings['Web connect'] == true,
+    '[neoperro] Turn on Web connect in your table and reload it before pairing.')
+environment.__neoperroPanelLaunch = {}
+local previous = environment.__neoperroPanelBridge
+if type(previous) == 'table' and type(previous.Stop) == 'function' then previous:Stop() end
+local bridge = {Alive = true, Runtime = runtime, AppliedRevision = 0, RejectedRevision = 0, ErrorCode = nil, Status = 'connecting'}
+function bridge:Stop()
+    self.Alive = false
+    self.Status = 'stopped'
+    token = nil
+end
+environment.__neoperroPanelBridge = bridge
+local http = game:GetService('HttpService')
+task.spawn(function()
+    local failures = 0
+    while bridge.Alive and environment.__neoperroPanelBridge == bridge do
+        local active = environment.__neoperroRuntimeV1
+        if type(active) ~= 'table' or not active.Alive then bridge:Stop(); break end
+        local settings = environment.neoperro
+        if not active.PanelAlwaysConnect and (type(settings) ~= 'table' or settings['Web connect'] ~= true) then bridge:Stop(); break end
+        bridge.Runtime = active
+        local configEnabled = type(settings) == 'table' and settings['Web configs'] == true
+        local calibrationOK, calibration = pcall(active.GetCalibrationReport, active, true)
+        local responseOK, response = pcall(requestFunction, {
+            Url = 'https://www.fosternya.xyz/api/panel?action=runtime',
+            Method = 'POST',
+            Headers = {['Content-Type'] = 'application/json', Authorization = 'Bearer ' .. token},
+            Body = http:JSONEncode({version = active.Version,
+                appliedRevision = bridge.AppliedRevision, rejectedRevision = bridge.RejectedRevision,
+                errorCode = bridge.ErrorCode, configEnabled = configEnabled, calibration = calibrationOK and calibration or nil}),
+        })
+        if not bridge.Alive or environment.__neoperroPanelBridge ~= bridge then break end
+        if environment.__neoperroRuntimeV1 ~= active then bridge:Stop(); break end
+        local currentSettings = environment.neoperro
+        if not active.PanelAlwaysConnect and (type(currentSettings) ~= 'table' or currentSettings['Web connect'] ~= true) then bridge:Stop(); break end
+        configEnabled = configEnabled and type(currentSettings) == 'table' and currentSettings['Web configs'] == true
+        local status = responseOK and type(response) == 'table' and tonumber(response.StatusCode or response.Status or response.status_code or response.status) or 0
+        if status == 401 or status == 403 or status == 410 then
+            warn('[neoperro] Dashboard session rejected the client (HTTP ' .. status .. '). Sign in and rerun the loader.')
+            bridge:Stop(); break
+        end
+        local decodedOK, data = false, nil
+        local responseBody = type(response) == 'table' and (response.Body or response.body)
+        if status == 200 and type(responseBody) == 'string' and #responseBody < 65536 then
+            decodedOK, data = pcall(function() return http:JSONDecode(responseBody) end)
+        end
+        if decodedOK and type(data) == 'table' and type(data.revision) == 'number'
+            and data.revision >= 0 and data.revision < 9007199254740991 and data.revision % 1 == 0 then
+            failures = 0
+            if bridge.Status ~= 'connected' then print('[neoperro] Panel connected.') end
+            bridge.Status = 'connected'
+            if type(active.SetCalibrationSession) == 'function' then active:SetCalibrationSession(data.calibrationSession) end
+            if configEnabled and type(data.config) == 'table' and data.revision > bridge.AppliedRevision
+                and data.revision ~= bridge.RejectedRevision then
+                local current = environment.__neoperroRuntimeV1
+                if type(current) == 'table' and current.Alive and type(current.ApplyConfig) == 'function' then
+                    local apply = type(current.ApplyWebConfig) == 'function' and current.ApplyWebConfig or current.ApplyConfig
+                    local applied, result = pcall(function() return apply(current,data.config) end)
+                    if applied and result ~= false then
+                        bridge.AppliedRevision, bridge.ErrorCode = data.revision, nil
+                        print('[neoperro] Web config applied: ' .. tostring(data.revision))
+                    else bridge.RejectedRevision, bridge.ErrorCode = data.revision, 'apply-failed' end
+                else bridge.RejectedRevision, bridge.ErrorCode = data.revision, 'runtime-unavailable' end
+            end
+        else
+            failures = failures + 1
+            bridge.Status = 'reconnecting'
+            if failures == 3 then
+                warn('[neoperro] Dashboard check-in failed (HTTP ' .. status .. '). Retrying.')
+            end
+        end
+        task.wait(math.min(30, 2 * 2 ^ math.min(failures, 4)))
+    end
+    token = nil
+end)
+return bridge

@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "games": {
+    "da-strike": {
+      "transport": {
+        "kind": "mouse-remote",
+        "remoteNames": [
+          "MAINEVENT",
+          "MainEvent"
+        ],
+        "action": "MOUSE"
+      },
+      "weapons": {
+        "ammoNames": [
+          "AMMO",
+          "Ammo"
+        ],
+        "ignoredNames": [
+          "wallet",
+          "phone",
+          "knife",
+          "katana"
+        ],
+        "aliases": {
+          "rev": "Revolver",
+          "revolver": "Revolver",
+          "db": "Double-Barrel SG",
+          "doublebarrel": "Double-Barrel SG",
+          "doublebarrelsg": "Double-Barrel SG",
+          "tacticalsg": "TacticalShotgun",
+          "tacticalshotgun": "TacticalShotgun",
+          "sg": "Shotgun",
+          "shotgun": "Shotgun",
+          "usp": "Usp",
+          "silencer": "Silencer",
+          "smg": "SMG"
+        }
+      },
+      "environment": {
+        "effects": "BodyEffects",
+        "koValues": [
+          "K.O",
+          "Knocked"
+        ],
+        "deadValues": [
+          "Dead"
+        ],
+        "reloadValues": [
+          "Reload"
+        ],
+        "crewPath": [
+          "DataFolder",
+          "Information",
+          "Crew"
+        ],
+        "animationPath": [
+          "Animations"
+        ]
+      },
+      "name": "Da Strike",
+      "placeIds": [
+        "134196333708867"
+      ]
+    },
+    "da-uphill": {
+      "transport": {
+        "kind": "mouse-remote",
+        "remoteNames": [
+          "MAINEVENT",
+          "MainEvent"
+        ],
+        "action": "MOUSE"
+      },
+      "weapons": {
+        "ammoNames": [
+          "AMMO",
+          "Ammo"
+        ],
+        "ignoredNames": [
+          "wallet",
+          "phone",
+          "knife",
+          "katana"
+        ],
+        "aliases": {
+          "rev": "Revolver",
+          "revolver": "Revolver",
+          "db": "Double-Barrel SG",
+          "doublebarrel": "Double-Barrel SG",
+          "doublebarrelsg": "Double-Barrel SG",
+          "tacticalsg": "TacticalShotgun",
+          "tacticalshotgun": "TacticalShotgun",
+          "sg": "Shotgun",
+          "shotgun": "Shotgun",
+          "usp": "Usp",
+          "silencer": "Silencer",
+          "smg": "SMG"
+        }
+      },
+      "environment": {
+        "effects": "BodyEffects",
+        "koValues": [
+          "K.O",
+          "Knocked"
+        ],
+        "deadValues": [
+          "Dead"
+        ],
+        "reloadValues": [
+          "Reload"
+        ],
+        "crewPath": [
+          "DataFolder",
+          "Information",
+          "Crew"
+        ],
+        "animationPath": [
+          "Animations"
+        ]
+      },
+      "name": "Da Uphill",
+      "placeIds": [
+        "71324444457408"
+      ]
+    },
+    "da-uphill-2": {
+      "transport": {
+        "kind": "mouse-remote",
+        "remoteNames": [
+          "MAINEVENT",
+          "MainEvent"
+        ],
+        "action": "MOUSE"
+      },
+      "weapons": {
+        "ammoNames": [
+          "AMMO",
+          "Ammo"
+        ],
+        "ignoredNames": [
+          "wallet",
+          "phone",
+          "knife",
+          "katana"
+        ],
+        "aliases": {
+          "rev": "Revolver",
+          "revolver": "Revolver",
+          "db": "Double-Barrel SG",
+          "doublebarrel": "Double-Barrel SG",
+          "doublebarrelsg": "Double-Barrel SG",
+          "tacticalsg": "TacticalShotgun",
+          "tacticalshotgun": "TacticalShotgun",
+          "sg": "Shotgun",
+          "shotgun": "Shotgun",
+          "usp": "Usp",
+          "silencer": "Silencer",
+          "smg": "SMG"
+        }
+      },
+      "environment": {
+        "effects": "BodyEffects",
+        "koValues": [
+          "K.O",
+          "Knocked"
+        ],
+        "deadValues": [
+          "Dead"
+        ],
+        "reloadValues": [
+          "Reload"
+        ],
+        "crewPath": [
+          "DataFolder",
+          "Information",
+          "Crew"
+        ],
+        "animationPath": [
+          "Animations"
+        ]
+      },
+      "name": "Da Uphill 2",
+      "placeIds": [
+        "94814626935145"
+      ]
+    },
+    "da-downhill": {
+      "transport": {
+        "kind": "mouse-remote",
+        "remoteNames": [
+          "MAINEVENT",
+          "MainEvent"
+        ],
+        "action": "MOUSE"
+      },
+      "weapons": {
+        "ammoNames": [
+          "AMMO",
+          "Ammo"
+        ],
+        "ignoredNames": [
+          "wallet",
+          "phone",
+          "knife",
+          "katana"
+        ],
+        "aliases": {
+          "rev": "Revolver",
+          "revolver": "Revolver",
+          "db": "Double-Barrel SG",
+          "doublebarrel": "Double-Barrel SG",
+          "doublebarrelsg": "Double-Barrel SG",
+          "tacticalsg": "TacticalShotgun",
+          "tacticalshotgun": "TacticalShotgun",
+          "sg": "Shotgun",
+          "shotgun": "Shotgun",
+          "usp": "Usp",
+          "silencer": "Silencer",
+          "smg": "SMG"
+        }
+      },
+      "environment": {
+        "effects": "BodyEffects",
+        "koValues": [
+          "K.O",
+          "Knocked"
+        ],
+        "deadValues": [
+          "Dead"
+        ],
+        "reloadValues": [
+          "Reload"
+        ],
+        "crewPath": [
+          "DataFolder",
+          "Information",
+          "Crew"
+        ],
+        "animationPath": [
+          "Animations"
+        ]
+      },
+      "name": "Da Downhill",
+      "placeIds": [
+        "139144803593140"
+      ]
+    },
+    "da-hood": {
+      "transport": {
+        "kind": "aim-module",
+        "modulePath": [
+          "Modules",
+          "GunHandler"
+        ],
+        "method": "getAim"
+      },
+      "weapons": {
+        "ammoNames": [
+          "AMMO",
+          "Ammo"
+        ],
+        "ignoredNames": [
+          "wallet",
+          "phone",
+          "knife",
+          "katana",
+          "tipjar",
+          "combat"
+        ],
+        "aliases": {
+          "rev": "Revolver",
+          "revolver": "Revolver",
+          "db": "Double-Barrel SG",
+          "doublebarrel": "Double-Barrel SG",
+          "doublebarrelsg": "Double-Barrel SG",
+          "tacticalsg": "TacticalShotgun",
+          "tacticalshotgun": "TacticalShotgun",
+          "sg": "Shotgun",
+          "shotgun": "Shotgun",
+          "usp": "Usp",
+          "silencer": "Silencer",
+          "smg": "SMG",
+          "flintlock": "Flintlock",
+          "ar": "AR",
+          "ak47": "AK47",
+          "aug": "AUG",
+          "lmg": "LMG",
+          "rifle": "Rifle",
+          "drumshotgun": "Drum-Shotgun",
+          "silencerar": "SilencerAR",
+          "p90": "P90"
+        }
+      },
+      "environment": {
+        "effects": "BodyEffects",
+        "koValues": [
+          "K.O",
+          "Knocked"
+        ],
+        "deadValues": [
+          "Dead"
+        ],
+        "reloadValues": [
+          "Reload"
+        ],
+        "crewPath": [
+          "DataFolder",
+          "Information",
+          "Crew"
+        ],
+        "animationPath": [
+          "Animations"
+        ]
+      },
+      "name": "Da Hood",
+      "placeIds": [
+        "2788229376"
+      ]
+    }
+  }
+}
