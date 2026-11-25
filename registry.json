@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": 4,
+  "revision": 5,
   "games": {
     "da-strike": {
       "transport": {
@@ -182,7 +182,7 @@
       },
       "name": "Da Uphill 2",
       "placeIds": [
-        "94814626935145"
+        "86627569589105"
       ]
     },
     "da-downhill": {
