@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": 5,
+  "revision": 6,
   "games": {
     "da-strike": {
       "transport": {
@@ -60,7 +60,7 @@
       },
       "name": "Da Strike",
       "placeIds": [
-        "92151226870194"
+        "71547976750123"
       ]
     },
     "da-uphill": {
